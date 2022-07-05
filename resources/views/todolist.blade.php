@@ -19,9 +19,9 @@
             <td>
                 @if($todo->status == 1)
                     {{'着手'}}
-                @elseif($todo->status == 1)
+                @elseif($todo->status == 2)
                     {{'完了'}}
-                @else($todo->status == 1)
+                @else
                     {{'未'}}
                 @endif
             </td>
