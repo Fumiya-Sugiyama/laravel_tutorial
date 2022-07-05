@@ -12,6 +12,3 @@
 */
 
 Route::get('/', 'TodoController@index');
-//Route::get('/', function () {
-//    return view('welcome');
-//});
