@@ -16,3 +16,5 @@ Route::get('/create', 'TodoController@create');
 Route::post('/create-todo', 'TodoController@createTodo');
 Route::get('/done-todo/{id}', 'TodoController@doneTodo');
 Route::get('/detail/{id}', 'TodoController@detail');
+Route::get('/edit/{id}', 'TodoController@edit');
+Route::post('/edit-todo', 'TodoController@editTodo');
