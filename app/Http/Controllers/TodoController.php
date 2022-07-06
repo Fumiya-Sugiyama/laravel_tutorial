@@ -50,8 +50,24 @@ class TodoController extends Controller
 
         $todo = Todo::find($id);
         $todo->status = 2;
+        $todo->updated_by = "";
+        $todo->updated_at = now();
         $todo->save();
 
         return redirect('/');
+    }
+
+    // TODOの詳細
+    public function detail($id) {
+
+        $todo = Todo::find($id);
+        return view('todoDetail', [
+            "todo" => $todo
+        ]);
+    }
+
+    public function todoDetail(Request $request) {
+        
+        $todo = Todo::find($request->id);
     }
 }
