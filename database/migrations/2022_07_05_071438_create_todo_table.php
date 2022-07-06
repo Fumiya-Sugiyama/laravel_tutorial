@@ -21,8 +21,8 @@ class CreateTodoTable extends Migration
             $table->datetime('deadline'); // 期限
             $table->integer('created_by'); // 作成者
             $table->datetime('created_at'); // 作成日時
-            $table->integer('update_by'); // 更新者
-            $table->datetime('update_at'); // 更新日時
+            $table->integer('updated_by'); // 更新者
+            $table->datetime('updated_at'); // 更新日時
         });
     }
 

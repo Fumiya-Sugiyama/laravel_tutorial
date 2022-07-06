@@ -12,3 +12,5 @@
 */
 
 Route::get('/', 'TodoController@index');
+Route::get('/create', 'TodoController@create');
+route::post('/create-todo', 'TodoController@createTodo');
