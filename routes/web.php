@@ -11,6 +11,7 @@
 |
 */
 
+// TODO
 Route::get('/', 'TodoController@index');
 Route::get('/create', 'TodoController@create');
 Route::post('/create-todo', 'TodoController@createTodo');
@@ -21,3 +22,7 @@ Route::post('/edit-todo', 'TodoController@editTodo');
 Route::get('/delete/{id}', 'TodoController@delete');
 Route::post('/delete-todo/{id}', 'TodoController@deleteTodo');
 Route::post('/search-todo/{description}', 'TodoController@searchTodo');
+Auth::routes();
+
+// AUTH
+Route::get('/home', 'HomeController@index')->name('home');
