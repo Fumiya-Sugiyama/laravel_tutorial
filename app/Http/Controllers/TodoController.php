@@ -83,6 +83,13 @@ class TodoController extends Controller
     // TODO編集
     public function editTodo(Request $request) {
         
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'status' => 'required|numeric',
+            'deadline' => 'date'
+        ]);
+
         Todo::find($request->id)->update([
             'title' => $request->title,
             'description' => $request->description,
