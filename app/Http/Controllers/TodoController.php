@@ -101,4 +101,20 @@ class TodoController extends Controller
 
         return redirect('/');
     }
+
+    // TODO削除画面の表示
+    public function delete($id) {
+        
+        $todo = Todo::find($id);
+        return view('deleteTodo', [
+            "todo" => $todo
+        ]);
+    }
+
+    // TODO削除
+    public function deleteTodo($id) {
+
+        Todo::find($id)->delete();
+        return redirect('/');
+    }
 }
