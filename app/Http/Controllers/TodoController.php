@@ -117,4 +117,14 @@ class TodoController extends Controller
         Todo::find($id)->delete();
         return redirect('/');
     }
+
+    // TODO検索
+    public function searchTodo(Request $request) {
+
+        $todos = Todo::where('description','like','%'.$request->input('description').'%')->orderBy('id', 'asc')->get();
+        return view('todolist', [
+            "todos" => $todos
+        ]);
+
+    }
 }

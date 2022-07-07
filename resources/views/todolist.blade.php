@@ -3,6 +3,12 @@
 <div>
     <h2>TODO一覧</h2>
     <a href="/create">新規作成</a>
+    <form method="POST" action="/search-todo/}">
+        @csrf
+        <input type="text" name="description" placeholder="内容を入力">
+        <input type="submit" name="search" value="検索">
+        <button href ="/">検索リセット</button>
+    </form>
     <table border="1">
         <tr>
             <th>タイトル</th>
@@ -13,7 +19,7 @@
         </tr>
         @foreach($todos as $todo)
         <tr>
-            <td><a href="">{{$todo->title}}</td>
+            <td><a href="/detail/{{$todo->id}}">{{$todo->title}}</td>
             <td>{{$todo->description}}</td>
             <td>{{substr($todo->deadline,0,10)}}</td>
             <td>
@@ -26,8 +32,8 @@
                 @endif
             </td>
             <td><a href="/done-todo/{{$todo->id}}">完了</a></td>
-            <td><a href="">編集</a></td>
-            <td><a href="">削除</a></td>
+            <td><a href="/edit/{{$todo->id}}">編集</a></td>
+            <td><a href="/delete/{{$todo->id}}">削除</a></td>
         </tr>
         @endforeach
     </table>
