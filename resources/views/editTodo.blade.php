@@ -23,10 +23,12 @@
             内　　容：<input type="text" name="description" value="{{$todo->description}}">
         </p>
         <p>
-            期　　限：<input type="date" name="deadline" value="{{$todo->description}}">
+            期　　限：<input type="date" name="deadline" value= {{$todo->deadline}}>
         </p>
         <p>
-            状　　態：<input type="radio" name="status" value=0>未 <input type="radio" name="status" value=1>着手 <input type="radio" name="status" value=2>完了
+            状　　態：<input type="radio" name="status" value=0 @if ($todo->status == 0) checked @endif)>未 
+            <input type="radio" name="status" value=1 @if ($todo->status == 1) checked @endif)>着手 
+            <input type="radio" name="status" value=2 @if ($todo->status == 2) checked @endif)>完了
         </p>
         <input type="submit" name="edit" value="編集">
     </form>
