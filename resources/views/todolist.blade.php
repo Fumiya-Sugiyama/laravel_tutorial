@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<h1>ToDo</h1>                                                                                                 
+@extends('layouts.app')
+
+@section('content')
+<h1>ToDo</h1>
+
 <div>
     <h2>TODO一覧</h2>
     <a href="/create">新規作成</a>
@@ -38,3 +42,4 @@
         @endforeach
     </table>
 </div>
+@endsection
