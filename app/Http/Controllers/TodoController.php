@@ -4,14 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Todo;
+use Auth;
 
 class TodoController extends Controller
 {
 
     // TODO一覧表示
     public function index() {
-        $todos = Todo::orderBy('id', 'asc')->get();
-        $latestTodo = Todo::where('status','!=',2)->orderby('created_at', 'desc')->first();
+
+        // ログインユーザのIDを取得
+        $uid = (Auth::check())? Auth::id() : 0;
+
+        $todos = Todo::where('created_by', '=', $uid)->orderBy('id', 'asc')->get();
+        $latestTodo = Todo::where('status','!=', 2)->where('created_by', '=', $uid)->orderby('created_at', 'desc')->first();
         return view('todolist', [
             "todos" => $todos,
             "latestTodo" => $latestTodo
@@ -33,14 +38,17 @@ class TodoController extends Controller
             'deadline' => 'date'
         ]);
 
+        // ログインユーザのIDを取得
+        $uid = (Auth::check())? Auth::id() : 0;
+
         $todo = new Todo();
         $todo->title = $request->title;
         $todo->description = $request->description;
         $todo->status = $request->status;
         $todo->deadline = $request->deadline;
-        $todo->created_by = "";
+        $todo->created_by = $uid;
         $todo->created_at = now();
-        $todo->updated_by = "";
+        $todo->updated_by = $uid;
         $todo->updated_at = now();
         $todo->save();
 
@@ -50,9 +58,12 @@ class TodoController extends Controller
     // TODOの完了
     public function doneTodo($id) {
 
+        // ログインユーザのIDを取得
+        $uid = (Auth::check())? Auth::id() : 0;
+
         $todo = Todo::find($id);
         $todo->status = 2;
-        $todo->updated_by = "";
+        $todo->updated_by = $uid;
         $todo->updated_at = now();
         $todo->save();
 
@@ -92,12 +103,15 @@ class TodoController extends Controller
             'deadline' => 'date'
         ]);
 
+        // ログインユーザのIDを取得
+        $uid = (Auth::check())? Auth::id() : 0;
+
         Todo::find($request->id)->update([
             'title' => $request->title,
             'description' => $request->description,
             'deadline' => $request->deadline,
             'status' => $request->status,
-            'updated_by' => "",
+            'updated_by' =>$uid,
             'updated_at' => now()
         ]);
 
@@ -123,7 +137,10 @@ class TodoController extends Controller
     // TODO検索
     public function searchTodo(Request $request) {
 
-        $todos = Todo::where('description','like','%'.$request->input('description').'%')->orderBy('id', 'asc')->get();
+        // ログインユーザのIDを取得
+        $uid = (Auth::check())? Auth::id() : 0;
+
+        $todos = Todo::where('created_by', '=', $uid)->where('description','like','%'.$request->input('description').'%')->orderBy('id', 'asc')->get();
         return view('todolist', [
             "todos" => $todos
         ]);
