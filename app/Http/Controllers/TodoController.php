@@ -11,8 +11,10 @@ class TodoController extends Controller
     // TODO一覧表示
     public function index() {
         $todos = Todo::orderBy('id', 'asc')->get();
+        $latestTodo = Todo::where('status','!=',2)->orderby('created_at', 'desc')->first();
         return view('todolist', [
-            "todos" => $todos
+            "todos" => $todos,
+            "latestTodo" => $latestTodo
         ]);
     }
 
