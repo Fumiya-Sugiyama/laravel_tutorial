@@ -74,9 +74,19 @@ class TodoController extends Controller
     public function detail($id) {
 
         $todo = Todo::find($id);
-        return view('todoDetail', [
-            "todo" => $todo
-        ]);
+
+        if (isset($todo) && (Auth::id() == $todo->created_by || Auth::id() == $todo->updated_by)) {
+                
+            // 存在するTODO作成者か更新者なら遷移
+            return view('todoDetail', [
+                "todo" => $todo
+            ]);
+        } else {
+
+            // そうでなければ戻る
+            return redirect('/');
+        }
+
     }
 
     public function todoDetail(Request $request) {
@@ -88,9 +98,20 @@ class TodoController extends Controller
     public function edit($id) {
 
             $todo = Todo::find($id);
-            return view('editTodo', [
-                "todo" => $todo
-            ]);
+            if (isset($todo) && (Auth::id() == $todo->created_by || Auth::id() == $todo->updated_by)) {
+                
+                // 存在するTODO作成者か更新者なら遷移
+                return view('editTodo', [
+                    "todo" => $todo
+                ]);
+            } else {
+
+                // そうでなければ戻る
+                return redirect('/');
+            }
+            //return view('editTodo', [
+            //    "todo" => $todo
+            //]);
     }
 
     // TODO編集
@@ -122,9 +143,18 @@ class TodoController extends Controller
     public function delete($id) {
         
         $todo = Todo::find($id);
-        return view('deleteTodo', [
-            "todo" => $todo
-        ]);
+        if (isset($todo) && (Auth::id() == $todo->created_by || Auth::id() == $todo->updated_by)) {
+                
+            // 存在するTODO作成者か更新者なら遷移
+            return view('deleteTodo', [
+                "todo" => $todo
+            ]);
+        } else {
+
+            // そうでなければ戻る
+            return redirect('/');
+        }
+
     }
 
     // TODO削除
