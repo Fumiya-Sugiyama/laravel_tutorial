@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+@extends('layouts.app')
+
+@section('content')
+<head>
+    <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
+</head>
 <h1>ToDo</h1>                                                                                                 
 <div>
     <h2>TODO削除</h2>
@@ -13,8 +19,9 @@
         <hr>
         <p>状　　態:{{$todo->status}}</p>
         <hr>
-        <input type="submit" name="delete" value="削除">
+        <input type="submit" name="delete" value="削除" class="btn btn-warning">
     </form>
     <br>
-    <a href="/">戻る</a>
+    <a href="/" class="btn btn-secondary">戻る</a>
 </div>
+@endsection

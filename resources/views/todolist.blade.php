@@ -2,12 +2,15 @@
 @extends('layouts.app')
 
 @section('content')
+<head>
+    <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
+</head>
 <div>
 
     @if (isset($latestTodo))
     <h2>最新未達成TODO</h2>
-    <table border="1">
-        <tr>
+    <table class="table table-striped table-bordered">
+        <tr style="text-align: center">
             <th>タイトル</th>
             <th>内容</th>
             <th>期限</th>
@@ -41,11 +44,11 @@
     <form method="POST" action="/search-todo/}">
         @csrf
         <input type="text" name="description" placeholder="内容を入力">
-        <input type="submit" name="search" value="検索">
-        <button href ="/">検索リセット</button>
+        <input type="submit" name="search" value="検索" class="btn btn-primary">
+        <button class='btn btn-secondary' href ="/">検索リセット</button>
     </form>
-    <table border="1">
-        <tr>
+    <table class="table table-striped table-bordered">
+        <tr style="text-align: center">
             <th>タイトル</th>
             <th>内容</th>
             <th>期限</th>

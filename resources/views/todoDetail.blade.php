@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+@extends('layouts.app')
+
+@section('content')
+<head>
+    <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
+</head>
 <h1>ToDo</h1>                                                                                                 
 <div>
     <h2>TODO詳細</h2>
@@ -12,5 +18,6 @@
     <p>状　　態:{{$todo->status}}</p>
     <hr>
 
-    <a href="/">戻る</a>
+    <a href="/" class="btn btn-secondary">戻る</a>
 </div>
+@endsection
